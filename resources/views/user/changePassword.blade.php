@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container" style="margin-left: 20%;margin-bottom:8%;">
-    <h1>Add User</h1>
+    <h1>Change password</h1>
     <form  method="post" action="{{ route('changepasswordsubmit') }}">
         @csrf
         <div class="form-group">

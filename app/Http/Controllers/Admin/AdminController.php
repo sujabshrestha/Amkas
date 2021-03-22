@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
-use Illuminate\support\Facades\Auth;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\support\Facades\Auth;
 use App\User;
 
 class AdminController extends Controller
@@ -85,6 +87,4 @@ class AdminController extends Controller
 
         return view('user.changePassword');
     }
-
-
 }

@@ -15,7 +15,7 @@
 </div>
 <div class="form-group">
   <label for="exampleInputEmail1">Email address</label>
-  <input type="email" class="form-control" name="email" value="{{ isset($user->email) ? $user->email : "" }}" disabled id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+  <input type="email" class="form-control" name="email" value="{{ isset($user->email) ? $user->email : "" }}"  @if(isset($user) && $user->role == 'admin') disabled @endif id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
     @error('email')
     <div class="text-danger">{{ $message }}</div>
     @enderror
