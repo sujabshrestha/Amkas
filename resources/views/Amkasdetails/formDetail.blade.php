@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="formdetail"  style="margin-left:17%;">
+<div class="formdetail"  style="margin-left:17%;margin-top:2%;">
     <h1>AMKAS Shelter Home Client Case Study Form</h1>
 
 <div class="row">

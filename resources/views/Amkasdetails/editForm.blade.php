@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container" style="margin-left: 20%;margin-bottom:8%;">
+<div class="container" style="margin-left: 20%;margin-bottom:8%;margin-top:2%;">
     <h1 style="margin-left: 35%;font-weight:500; text-decoration: underline;"> Edit Amkas Form</h1>
     <form  method="post" action="{{ route('editformsubmit',$form->id) }}">
         @csrf

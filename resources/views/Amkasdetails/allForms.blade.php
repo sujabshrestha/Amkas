@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container" style="margin-left:18%;">
+<div class="container" style="margin-left:18%;margin-top:2%;">
     <table class="table">
         <thead class="thead-dark">
           <tr>
