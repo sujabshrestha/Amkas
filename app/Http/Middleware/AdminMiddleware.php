@@ -17,13 +17,12 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check())
-        {
-            if(Auth::user()->role == 'admin'){
-                return $next($request);
-            }
-            return redirect()->back()->with('error','credidentials are incorrect');
+     
+        if(Auth::user()->role == 'admin'){
+            return $next($request);
         }
+        return redirect()->back()->with('error','credidentials are incorrect');
+
         return redirect()->back()->with('error','credidentials are incorrect');
     }
 }

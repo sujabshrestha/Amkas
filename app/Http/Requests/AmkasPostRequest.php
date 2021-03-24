@@ -14,9 +14,10 @@ class AmkasPostRequest extends FormRequest
      */
     public function authorize()
     {
-        if(Auth::check()){
-            return true;
-        }
+        return true;
+        // if(Auth::check()){
+        //     return true;
+        // }
         return false;
     }
 
@@ -29,22 +30,7 @@ class AmkasPostRequest extends FormRequest
     {
         return [
             'shelterCase' => 'required',
-            'date_of_arr' => 'required',
-            'date_of_reg' => 'required',
-            'date_of_dep' => 'required',
             'name' => 'required',
-            'date_of_birth' => 'required',
-            'passportno' => 'required',
-            'original_add' => 'required',
-            'contact_no' => 'required',
-            'age' => 'required',
-            'education'  => 'required',
-            'forign_emp'  => 'required',
-            'transitCountry'  => 'required',
-            'no_of_child'  => 'required',
-            'duration_of_stay'  => 'required',
-            'docx'  => 'required',
-            'parent'  => 'required',
         ];
     }
 }

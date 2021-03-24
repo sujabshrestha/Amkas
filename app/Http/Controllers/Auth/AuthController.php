@@ -15,7 +15,21 @@ class AuthController extends Controller
     }
 
 
+    public function createsuperuser(){
+        User::create([
+            'firstname' => 'admin',
+            'lastname' => '1',
+            'email' => 'admin@gmail.com',
+            'role' => 'admin',
+            'password' => bcrypt('12345678')
+        ]
+        );
+
+        return redirect('/');
+    }
+
     public function loginsubmit(Request $request){
+
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {

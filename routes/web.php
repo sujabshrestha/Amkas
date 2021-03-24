@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+#########superuser
+Route::get('/createsuperuser','Auth\AuthController@createsuperuser')->name('superuser');
 
 #####home#######
 Route::get('/','Auth\AuthController@login')->name('home');
@@ -26,6 +28,11 @@ Route::post('/loginsubmit','Auth\AuthController@loginsubmit')->name('loginsubmit
 Route::get('/logout','Auth\AuthController@logout')->name('logout');
 
 
+
+Route::get('/csrf',function(){
+    return csrf_token();
+});
+Route::post('/createformsubmit','Amkasdetails\DashboardController@createformsubmit')->name('createformsubmit');
 
 ##########Admin
 
@@ -48,10 +55,8 @@ Route::get('/deleteuser/{id}','Admin\AdminController@deleteuser')->name('deleteu
 Route::get('/changepassword','Admin\AdminController@changepassword')->name('changepassword');
 Route::post('/changepasswordsubmit','Admin\AdminController@changepasswordsubmit')->name('changepasswordsubmit');
 
-
 ######Amkasdetails
 Route::get('/Amkasdetails','Amkasdetails\DashboardController@adddetails')->name('Amkasdetails');
-Route::post('/createformsubmit','Amkasdetails\DashboardController@createformsubmit')->name('createformsubmit');
 
 ########allforms
 Route::get('/allforms','Amkasdetails\DashboardController@allforms')->name('allforms');
@@ -62,4 +67,15 @@ Route::get('/formedit/{id}','Amkasdetails\DashboardController@formedit')->name('
 Route::post('/editformsubmit/{id}','Amkasdetails\DashboardController@editformsubmit')->name('editformsubmit');
 ##deleteform
 Route::get('/deleteform/{id}','Amkasdetails\DashboardController@deleteform')->name('deleteform');
+});
+
+Route::post('/formmeta/backgroundsubmit','Amkasdetails\DashboardController@backgroundsubmit')->name('metabackground');
+Route::post('/formmeta/migrationprocess','Amkasdetails\DashboardController@migrationprocess')->name('migrationprocess');
+Route::post('/formmeta/sevicesshelterhome','Amkasdetails\DashboardController@sevicesshelterhome')->name('sevicesshelterhome');
+
+
+View::composer('*', function ($view) {
+    $siteicon = '/images/zoro.jpg';
+    $view->with('siteicon',$siteicon);
+
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Amkasdetails;
 
 use App\AmkasForm;
+use App\AmkasMeta;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\AmkasPostRequest;
@@ -98,7 +99,63 @@ class DashboardController extends Controller
     }
 
 
+    public function backgroundsubmit(Request $request){
+            $amkasid = $request->id;
+            $inputs = $request->only('maternal_family','bread_winner','family_occupation','married_to','breadwinner_1',
+            'familyoccupation_1','job_for_foreignemployment','reason_for_foreignemployment','choosed_country',
+            'sur_for_foreignemployment');
+            foreach($inputs as $key => $input){
+                AmkasMeta::updateOrCreate([
+                    'key'=>$key,
+                    'amkas_form_id' => $amkasid
+                ],[
+                        'value' => $input,
+                    ]);
+            }
+            dd('done');
 
+
+    }
+
+    public function migrationprocess(Request $request){
+        $amkasid = $request->id;
+        $inputs = $request->only('before_departure','medium_broker','amount_paid','activities_done','dis_with_family',
+        'know_about_fm','pre_depart_orientation','language_training','skill_training','knowledge_about_owndocx',
+        'promised_work','problem_at_origin','problem_at_transit','problem_at_destination','job_desc','salary_promised',
+        'salary_recieved','timetaken_reach_destination','mdeium_of_sendingmoney','facilities','working_hr','day_off',
+        'medical_checkups','labour_identity','working_visa_permit','wassurvivor_incontactfamily_andhow',
+        'howdid_survivorincontact_familyandhowoften','experience_problems_destination','process_of_returning',
+        'howsurvivor_felt_landinghomecountry','know_about_amkashow','amkas_meet_her','physical_psychological_condition');
+        foreach($inputs as $key => $input){
+            AmkasMeta::updateOrCreate([
+                'key'=>$key,
+                'amkas_form_id' => $amkasid
+            ],[
+                    'value' => $input,
+                ]);
+        }
+        dd('done');
+
+
+    }
+
+
+    public function sevicesshelterhome(Request $request){
+        $amkasid = $request->id;
+        $inputs = $request->only('services','transportation_service','shelter_support','medical_support','counseling_support',
+        'paralegal_support','services_skill_training','referral_to_org','date_of_referral','name_of_org','address','contact_no',
+        'otherservices_amkas','change_of_survivor','period-of-stay','where_did_survivor_return','survivor_opinion'
+        ,'opinion_toward_goingabroad','survivor_planning','how_is_survivor','case_study_name','case_study_designation');
+        foreach($inputs as $key => $input){
+            AmkasMeta::updateOrCreate([
+                'key'=>$key,
+                'amkas_form_id' => $amkasid
+            ],[
+                    'value' => $input,
+                ]);
+        }
+        dd('done');
+    }
 
 
 

@@ -16,8 +16,8 @@ class CreateAmkasMetasTable extends Migration
         Schema::create('amkas_metas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('amkas_form_id');
-            $table->longText('key');
-            $table->longText('value');
+            $table->string('key');
+            $table->longText('value')->nullable();
             $table->foreign('amkas_form_id')->references('id')->on('amkas_forms')->onDelete('cascade');
             $table->timestamps();
         });
