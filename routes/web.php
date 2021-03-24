@@ -1,5 +1,6 @@
 <?php
 
+use App\Sitesetting;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 
@@ -67,6 +68,14 @@ Route::get('/formedit/{id}','Amkasdetails\DashboardController@formedit')->name('
 Route::post('/editformsubmit/{id}','Amkasdetails\DashboardController@editformsubmit')->name('editformsubmit');
 ##deleteform
 Route::get('/deleteform/{id}','Amkasdetails\DashboardController@deleteform')->name('deleteform');
+
+
+
+
+######sitesetting
+Route::get('/sitesetting','sitesetting\SiteController@sitesetting')->name('sitesetting');
+Route::post('/sitesettingsubmit','sitesetting\SiteController@sitesettingsubmit')->name('sitesettingsubmit');
+
 });
 
 Route::post('/formmeta/backgroundsubmit','Amkasdetails\DashboardController@backgroundsubmit')->name('metabackground');
@@ -75,7 +84,10 @@ Route::post('/formmeta/sevicesshelterhome','Amkasdetails\DashboardController@sev
 
 
 View::composer('*', function ($view) {
-    $siteicon = '/images/zoro.jpg';
+
+    $siteicon = Sitesetting::where('key','=','site_icon')->first();
+
+    // $siteicon = '/images/zoro.jpg';
     $view->with('siteicon',$siteicon);
 
 });
