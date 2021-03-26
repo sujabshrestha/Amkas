@@ -33,6 +33,7 @@
                 <a href="{{ route('formdetail',$detail->id) }}"><i class="fas fa-eye fa-2x" style="color: green;"></i></a>
                 <a href="{{ route('formedit',$detail->id) }}"><i class="fas fa-edit fa-2x"></i></a>
                 <a href="{{ route('deleteform',$detail->id) }}"><i class="fas fa-trash fa-2x" style="color: red;"></i></a>
+                <a href="{{ route('addMetas',$detail->id) }}"><i class="fas fa-plus fa-2x" style="color: black;"></i></a>
             </td>
           </tr>
           @endforeach

@@ -16,7 +16,26 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script src="https://kit.fontawesome.com/3a77735fb2.js" crossorigin="anonymous"></script>
+  @stack('css')
+  <style>
+  html, body {
+  height: 100%;
+  margin: 0;
+}
+.content {
+  min-height: 100%;
+}
+.content-inside {
+  padding: 20px;
+  padding-bottom: 50px;
+}
+.footer {
+  height: 50px;
+  margin-top: -50px;
+}   
+      </style>
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 
 @include('layouts.sidebar')

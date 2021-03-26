@@ -16,9 +16,7 @@ class DashboardController extends Controller
     }
 
     public function createformsubmit(AmkasPostRequest $request){
-
         $request->validated();
-
         AmkasForm::create([
             'sheltercase_no' => $request->shelterCase,
             'date_of_arr' =>  $request->date_of_arr,
@@ -93,26 +91,75 @@ class DashboardController extends Controller
     }
 
     public function deleteform($id){
-        $form = AmkasForm::findorfail($id);
+        $form = AmkasForm::findOrFail($id);
+        if($form->amkasmeta){
+            foreach($form->amkasmeta as $meta){
+                $meta->delete();
+            }
+        }
         $form->delete();
         return redirect()->back()->with('success','deleted successfully!!!');
     }
 
 
-    public function backgroundsubmit(Request $request){
-            $amkasid = $request->id;
-            $inputs = $request->only('maternal_family','bread_winner','family_occupation','married_to','breadwinner_1',
-            'familyoccupation_1','job_for_foreignemployment','reason_for_foreignemployment','choosed_country',
-            'sur_for_foreignemployment');
+    public function addMetas($id){
+        $amkasform = AmkasForm::findOrFail($id);
+        $formmeta = AmkasMeta::where('amkas_form_id',$id)->pluck('value','key')->toArray();
+        // dd($formmeta);
+        return view('Amkasdetails.addMetas',compact('amkasform','formmeta'));
+    }
+
+
+
+    public function metaSubmit(Request $request,$id){
+
+
+            // dd($request->medium_broker);
+            $inputs = $request->only(
+                ######background Submit
+            'maternal_family','bread_winner_1','family_occupation_1','family_married_to','bread_winner_2',
+            'family_occupation_2','job_for_foreignemployment','reason_for_foreignemployment','choosed_country',
+            'sur_for_foreignemployment',
+                ##########migrationprocess
+            'medium_broker','amount_paid','activities_done','dis_with_family',
+            'know_about_fm','pre_depart_orientation','language_training','skill_training','knowledge_about_owndocx',
+            'problem_at_origin','problem_at_transit','problem_at_destination','job_desc','salary_promised',
+            'salary_recieved','timetaken_reach_destination','medium_of_sendingmoney','facilities','working_hr','day_off',
+            'medical_checkups','labour_identity','working_visa_permit','wassurvivor_incontactfamily_andhow',
+            'howdid_survivorincontact_familyandhowoften','experience_problems_destination','process_of_returning',
+            'howsurvivor_felt_landinghomecountry','know_about_amkashow','amkas_meet_her','physical_psychological_condition',
+                ##########servicesby shelter home
+            'transportation_service','shelter_support','medical_support','counseling_support',
+            'paralegal_support','services_skill_training','referral_to_org','date_of_referral','name_of_org','address','contact_no',
+            'otherservices_amkas','change_of_survivor','period_of_stay','where_did_survivor_return','survivor_opinion'
+            ,'opinion_toward_goingabroad','survivor_planning','how_is_survivor','case_study_name','case_study_designation'
+
+
+
+        );
             foreach($inputs as $key => $input){
                 AmkasMeta::updateOrCreate([
                     'key'=>$key,
-                    'amkas_form_id' => $amkasid
+                    'amkas_form_id' => $id
                 ],[
                         'value' => $input,
                     ]);
             }
-            dd('done');
+
+            if($request->referral_to_org == '0'){
+
+
+                $dors = AmkasMeta::where('amkas_form_id',$id)
+                ->whereIn('key', ['date_of_referral','name_of_org','address','contact_no'])->get();
+                // dd($dors);
+               foreach($dors as $dor){
+                //    dd($dor);
+                $dor->value = '';
+                $dor->update();
+               }
+            }
+
+        return redirect()->route('allforms')->with('success','Amkas metas created successfully');
 
 
     }

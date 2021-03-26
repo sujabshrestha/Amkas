@@ -9,21 +9,21 @@
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Date of Arrival at TIA</label>
-          <input type="date" class="form-control" name="date_of_arr" id="date_of_arr" value="{{ isset($form->date_of_arr) ? $form->date_of_arr : "" }}" placeholder="Enter Date of Arrival at TIA">
+          <input type="text" class="form-control datepicker" name="date_of_arr" id="date_of_arr" value="{{ isset($form->date_of_arr) ? $form->date_of_arr : "" }}" placeholder="Enter Date of Arrival at TIA">
             @error('date_of_arr')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
             <label for="first">Enter Date of registration at AMKAS</label>
-            <input type="date" class="form-control" name="date_of_reg" value="{{ isset($form->date_of_reg) ? $form->date_of_reg : "" }}" id="date_of_reg" placeholder="Enter Date of registration">
+            <input type="text" class="form-control datepicker" name="date_of_reg" value="{{ isset($form->date_of_reg) ? $form->date_of_reg : "" }}" id="date_of_reg" placeholder="Enter Date of registration">
             @error('date_of_reg')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="form-group">
             <label for="first">Enter Date of Departure</label>
-            <input type="date" class="form-control" name="date_of_dep" value="{{ isset($form->date_of_dep) ? $form->date_of_dep : "" }}" id="date_of_dep" placeholder="Enter Date of Departure">
+            <input type="text" class="form-control datepicker" name="date_of_dep" value="{{ isset($form->date_of_dep) ? $form->date_of_dep : "" }}" id="date_of_dep" placeholder="Enter Date of Departure">
             @error('date_of_dep')
             <div class="text-danger">{{ $message }}</div>
             @enderror
@@ -38,7 +38,7 @@
         </div>
         <div class="form-group">
             <label for="first">Enter Date of Birth</label>
-            <input type="date" class="form-control" name="date_of_birth" value="{{ isset($form->dob) ? $form->dob : "" }}" id="date_of_birth" placeholder="Enter Date of Birth">
+            <input type="text" class="form-control datepicker" name="date_of_birth" value="{{ isset($form->dob) ? $form->dob : "" }}" id="date_of_birth" placeholder="Enter Date of Birth">
             @error('date_of_birth')
             <div class="text-danger">{{ $message }}</div>
             @enderror

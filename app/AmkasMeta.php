@@ -12,7 +12,9 @@ class AmkasMeta extends Model
     ];
 
 
-    
+    public function amkasform(){
+        return $this->belongsTo(AmkasForm::class,'id','amkas_form_id');
+    }
 
 
 }

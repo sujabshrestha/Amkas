@@ -11,4 +11,10 @@ class AmkasForm extends Model
         'originaladdress','contact_no','Education','foreignemployment','transitcountry',
         'durationofstay','age','document','parentialname','maritialstatus','no_of_children','natureofjobs'
     ];
+
+
+
+    public function amkasmeta(){
+        return $this->hasMany(AmkasMeta::class,'Amkas_form_id','id');
+    }
 }

@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\View;
 Route::get('/createsuperuser','Auth\AuthController@createsuperuser')->name('superuser');
 
 #####home#######
-Route::get('/','Auth\AuthController@login')->name('home');
+Route::get('/','Auth\AuthController@login')->name('login');
 Route::post('/registersubmit','AmkasController@registersubmit')->name('registersubmit');
 #######userregister
 
@@ -68,8 +68,9 @@ Route::get('/formedit/{id}','Amkasdetails\DashboardController@formedit')->name('
 Route::post('/editformsubmit/{id}','Amkasdetails\DashboardController@editformsubmit')->name('editformsubmit');
 ##deleteform
 Route::get('/deleteform/{id}','Amkasdetails\DashboardController@deleteform')->name('deleteform');
-
-
+##########Amkas metas
+Route::get('/addMetas/{id}','Amkasdetails\DashboardController@addMetas')->name('addMetas');
+Route::post('/formmeta/metaSubmit/{id}','Amkasdetails\DashboardController@metaSubmit')->name('metaSubmit');
 
 
 ######sitesetting
@@ -78,16 +79,21 @@ Route::post('/sitesettingsubmit','sitesetting\SiteController@sitesettingsubmit')
 
 });
 
-Route::post('/formmeta/backgroundsubmit','Amkasdetails\DashboardController@backgroundsubmit')->name('metabackground');
-Route::post('/formmeta/migrationprocess','Amkasdetails\DashboardController@migrationprocess')->name('migrationprocess');
-Route::post('/formmeta/sevicesshelterhome','Amkasdetails\DashboardController@sevicesshelterhome')->name('sevicesshelterhome');
+
+// Route::post('/formmeta/migrationprocess','Amkasdetails\DashboardController@migrationprocess')->name('migrationprocess');
+// Route::post('/formmeta/sevicesshelterhome','Amkasdetails\DashboardController@sevicesshelterhome')->name('sevicesshelterhome');
 
 
 View::composer('*', function ($view) {
 
     $siteicon = Sitesetting::where('key','=','site_icon')->first();
+    $favicon = Sitesetting::where('key','=','fav_icon')->first();
+    $description = Sitesetting::where('key','=','description')->first();
+
 
     // $siteicon = '/images/zoro.jpg';
     $view->with('siteicon',$siteicon);
+    $view->with('favicon',$favicon);
+    $view->with('description',$description);
 
 });
