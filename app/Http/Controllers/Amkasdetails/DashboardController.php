@@ -17,7 +17,7 @@ class DashboardController extends Controller
 
     public function createformsubmit(AmkasPostRequest $request){
         $request->validated();
-        AmkasForm::create([
+        $amkas = AmkasForm::create([
             'sheltercase_no' => $request->shelterCase,
             'date_of_arr' =>  $request->date_of_arr,
             'date_of_reg'  =>  $request->date_of_reg,
@@ -41,7 +41,7 @@ class DashboardController extends Controller
 
 
 
-        return redirect()->back()->with('success','Details Added Successfully!!!');
+        return redirect()->route('addMetas',$amkas->id)->with('success','product added successfully!!!');
     }
 
 

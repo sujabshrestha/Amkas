@@ -2,16 +2,70 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\AmkasForm;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\support\Facades\Auth;
 use App\User;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 
 class AdminController extends Controller
 {
     public function adminhome(){
-        return view('user.adminHome');
+        $amkasForms = AmkasForm::all();
+        
+        $today = Carbon::today();
+        $past   = $today->subMonths(6);
+        // dd($past->month);
+        ##########monthly arrival
+        $l = AmkasForm::latest()->first();
+
+        $month = [
+            $a = count(AmkasForm::where('date_of_arr','<=', Carbon::now())->where('date_of_arr','>', $past)->get()),
+
+        ];
+        // $march = AmkasForm::whereMonth('date_of_arr','=',date('03'))->get();
+        // $june = AmkasForm::whereMonth('date_of_arr','=',date('06'))->get();
+        // $l = AmkasForm::whereMonth('date_of_arr','=',date('03'))->get();
+        // dd($month[0]);
+        // $lastdate = $l->date_of_arr;
+        // dd($lastdate);
+
+        $context = new Collection();
+        $context->ageData = $this->ageChartData($amkasForms);
+        $context->maritialData = $this->maritialChartData($amkasForms);
+
+        return view('user.adminHome',compact('context','month'));
     }
+
+    /*age chart*/
+    private function ageChartData($forms){
+        $below20 = count(AmkasForm::where('age','<=','20')->get());
+        $twentyto30 = count(AmkasForm::where('age','>','20')->where('age','<','30')->get());
+        $thirtto40 = count(AmkasForm::where('age','>','30')->where('age','<','40')->get());
+        $fourtyto50 = count(AmkasForm::where('age','>','40')->where('age','<','50')->get());
+        $above50 = count(AmkasForm::where('age','>','50')->get());
+        return [
+            'below20' => $below20,
+            'twenyto30' => $twentyto30,
+            'thirtto40'=> $thirtto40,
+            'fourtyto50'=> $fourtyto50,
+            'above50'=> $above50,
+        ];
+    }
+    //maritial chart
+    private function maritialChartData($forms){
+       ######piechart for maritial status
+       $single = count(AmkasForm::where('maritialstatus','single')->get());
+       $married = count(AmkasForm::where('maritialstatus','married')->get());
+        return [
+            'single' => $single,
+            'married' => $married,
+        ];
+    }
+
+
 
 
 
